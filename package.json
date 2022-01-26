@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "start": "npx serve dist",
     "lint": "eslint --ext .ts,.tsx src --fix",
+    "server": "ts-node src/server",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -24,12 +25,17 @@
     "@babel/core": "^7.16.12",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
+    "@faker-js/faker": "^6.0.0-alpha.5",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/json-server": "^0.14.4",
     "@types/node": "^17.0.12",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
     "@vitejs/plugin-react": "^1.0.7",
+    "bcryptjs": "^2.4.3",
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -37,10 +43,14 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^7.0.4",
+    "json-server": "^0.17.0",
+    "json-server-auth": "^2.1.0",
     "lint-staged": "^12.3.1",
     "prettier": "^2.5.1",
     "pretty-quick": "^3.1.3",
+    "ts-node": "^10.4.0",
     "typescript": "^4.4.4",
+    "uuid": "^8.3.2",
     "vite": "^2.7.2"
   }
 }
