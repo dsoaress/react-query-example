@@ -1,4 +1,4 @@
-type Key = 'user'
+type Key = 'user' | 'page' | 'itemsPerPage' | 'totalPages' | 'filter'
 
 export function setLocalStorage(key: Key, value: string | number | boolean | object) {
   localStorage.setItem(key, JSON.stringify(value))
