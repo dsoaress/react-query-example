@@ -8,7 +8,12 @@ export function Professors() {
 
   return (
     <Layout>
-      <PersonsList resource="professors" title="Professors" persons={query.data?.items} />
+      <PersonsList
+        resource="professors"
+        title="Professors"
+        persons={query.data?.items}
+        isRefetching={query.isRefetching}
+      />
     </Layout>
   )
 }

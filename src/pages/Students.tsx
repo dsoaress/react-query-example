@@ -8,7 +8,12 @@ export function Students() {
 
   return (
     <Layout>
-      <PersonsList resource="students" title="Students" persons={query.data?.items} />
+      <PersonsList
+        resource="students"
+        title="Students"
+        persons={query.data?.items}
+        isRefetching={query.isRefetching}
+      />
     </Layout>
   )
 }
