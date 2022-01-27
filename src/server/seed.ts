@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid'
 import { Person, Resources, User } from '../types/Resources'
 
 type Data = {
-  [key in Resources]: Person[] | User[]
+  [key in Resources | 'users']: Person[] | User[]
 }
 
 export function Seed() {

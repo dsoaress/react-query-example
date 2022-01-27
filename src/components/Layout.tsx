@@ -7,7 +7,7 @@ type LayoutProps = {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <Box mx="auto" maxW="container.lg">
+    <Box mx="auto" maxW="container.md">
       {children}
     </Box>
   )

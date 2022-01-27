@@ -1,4 +1,4 @@
-export type Resources = 'students' | 'professors' | 'users'
+export type Resources = 'students' | 'professors'
 
 export type Person = {
   id: string
