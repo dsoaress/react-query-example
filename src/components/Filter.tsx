@@ -31,7 +31,7 @@ export function Filter({ resource }: FilterProps) {
             setFilter({
               ...filter,
               [resource]: {
-                ...filter[resource],
+                order: filter[resource].order,
                 sort: value
               }
             })
@@ -40,6 +40,7 @@ export function Filter({ resource }: FilterProps) {
           <MenuItemOption value="name">Name</MenuItemOption>
           <MenuItemOption value="desc">Registration date</MenuItemOption>
         </MenuOptionGroup>
+        <MenuDivider />
         <MenuOptionGroup
           defaultValue={filter[resource].order}
           title="Order by"
@@ -48,7 +49,7 @@ export function Filter({ resource }: FilterProps) {
             setFilter({
               ...filter,
               [resource]: {
-                ...filter[resource],
+                sort: filter[resource].sort,
                 order: value
               }
             })
@@ -57,6 +58,7 @@ export function Filter({ resource }: FilterProps) {
           <MenuItemOption value="asc">Ascending</MenuItemOption>
           <MenuItemOption value="desc">Descending</MenuItemOption>
         </MenuOptionGroup>
+        <MenuDivider />
         <MenuOptionGroup
           defaultValue={personsPerPage[resource].toString()}
           title="Persons per page"
@@ -74,7 +76,6 @@ export function Filter({ resource }: FilterProps) {
             </MenuItemOption>
           ))}
         </MenuOptionGroup>
-        <MenuDivider />
       </MenuList>
     </Menu>
   )
