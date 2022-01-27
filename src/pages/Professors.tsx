@@ -3,12 +3,12 @@ import { PersonsList } from '../components/PersonsList'
 import { useGetItems } from '../hooks/useGetItems'
 import { Person } from '../types/Resources'
 
-export function Home() {
-  const { query } = useGetItems<Person[]>('students')
+export function Professors() {
+  const { query } = useGetItems<Person[]>('professors')
 
   return (
     <Layout>
-      <PersonsList resource="students" persons={query.data?.items} />
+      <PersonsList resource="professors" title="Professors" persons={query.data?.items} />
     </Layout>
   )
 }
