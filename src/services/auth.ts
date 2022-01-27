@@ -5,6 +5,7 @@ type LoginResponse = {
   accessToken: string
   user: {
     id: string
+    avatar?: string
     name: string
     email: string
     createdAt: string
@@ -18,6 +19,7 @@ export async function loginUser(email: string, password: string) {
   return {
     data: {
       id: data.user.id,
+      avatar: data.user.avatar,
       name: data.user.name,
       email: data.user.email,
       createdAt: data.user.createdAt,
@@ -33,6 +35,7 @@ export async function getUserProfile(id: string, accessToken: string) {
   return {
     data: {
       id: user.id,
+      avatar: user.avatar,
       name: user.name,
       email: user.email,
       createdAt: user.createdAt

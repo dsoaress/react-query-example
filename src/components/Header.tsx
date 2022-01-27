@@ -2,6 +2,7 @@ import { Box, Flex, HStack } from '@chakra-ui/react'
 
 import { Logo } from '../assets/Logo'
 import { NavLink } from './NavLink'
+import { ProfileMenu } from './ProfileMenu'
 
 export function Header() {
   return (
@@ -20,6 +21,7 @@ export function Header() {
         <HStack as="nav" spacing={4}>
           <NavLink to="/students">Students</NavLink>
           <NavLink to="/professors">Professors</NavLink>
+          <ProfileMenu />
         </HStack>
       </Flex>
     </Box>
