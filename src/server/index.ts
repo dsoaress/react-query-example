@@ -11,12 +11,15 @@ const middlewares = jsonServer.defaults()
 const port = process.env.PORT || 3010
 const delay = process.env.DELAY || 1000 // 1 second
 
-// const rules = auth.rewriter({
-//   users: 660,
-//   students: 660,
-//   professors: 660
-// })
+const rules = auth.rewriter({
+  users: 660,
+  students: 660,
+  professors: 660
+})
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+server.db = router.db
 server.use(jsonServer.bodyParser)
 server.use((req, _res, next) => {
   if (req.method === 'POST') {
@@ -29,7 +32,7 @@ server.use((req, _res, next) => {
 
 server.use((_req, _res, next) => setTimeout(next, +delay))
 server.use(middlewares)
-// server.use(rules)
+server.use(rules)
 server.use(auth)
 server.use(router)
 

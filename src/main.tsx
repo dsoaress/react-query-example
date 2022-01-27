@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { BrowserRouter } from 'react-router-dom'
 
+import { AuthProvider } from './contexts/Auth'
 import { Routes } from './routes'
 
 const queryClient = new QueryClient()
@@ -14,7 +15,9 @@ function App() {
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ChakraProvider>
-          <Routes />
+          <AuthProvider>
+            <Routes />
+          </AuthProvider>
         </ChakraProvider>
         <ReactQueryDevtools />
       </QueryClientProvider>
