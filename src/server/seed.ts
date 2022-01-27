@@ -16,7 +16,8 @@ export function Seed() {
   }
 
   data.users.push({
-    id: uuid(),
+    id: 'b940b086-fdb5-403b-9ef4-377c0d517123',
+    avatar: faker.image.avatar(),
     name: 'John Doe',
     email: 'admin@admin.com',
     password: hashSync('12345678', 10),
@@ -33,6 +34,7 @@ export function Seed() {
 
       data.students.push({
         id: uuid(),
+        avatar: faker.image.avatar(),
         name: `${firstName} ${lastName}`,
         email: `${firstName}.${lastName}@student.university.edu`.toLowerCase(),
         createdAt: faker.date.recent().toISOString()
@@ -45,6 +47,7 @@ export function Seed() {
 
       data.professors.push({
         id: uuid(),
+        avatar: faker.image.avatar(),
         name: `${firstName} ${lastName}`,
         email: `${firstName}.${lastName}@university.edu`.toLowerCase(),
         createdAt: faker.date.recent().toISOString()

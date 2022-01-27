@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 import jsonServer from 'json-server'
 import auth from 'json-server-auth'
 import { v4 as uuid } from 'uuid'
