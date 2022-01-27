@@ -1,6 +1,7 @@
 import { Heading, HStack, Spinner, Stack } from '@chakra-ui/react'
 
 import { Person, Resources } from '../types/Resources'
+import { Filter } from './Filter'
 import { PersonCard } from './PersonCard'
 
 type PersonsListProps = {
@@ -14,6 +15,7 @@ export function PersonsList({ resource, persons, title, isRefetching }: PersonsL
   return (
     <Stack spacing={4}>
       <HStack spacing="4" align="center" mb="4">
+        <Filter resource={resource} />
         <Heading>{title}</Heading>
         {isRefetching && <Spinner size="xs" color="gray.300" />}
       </HStack>

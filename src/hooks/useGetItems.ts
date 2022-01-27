@@ -15,7 +15,7 @@ type Filter = {
 export async function getItems<T>(
   resource: Resources,
   page: number,
-  itemsPerPage: number,
+  PersonsPerPage: number,
   filter: Filter
 ) {
   const { data: items, headers } = await api.get<T>(apiRoutes[resource], {
@@ -23,11 +23,11 @@ export async function getItems<T>(
       _sort: filter.sort,
       _order: filter.order,
       _page: page,
-      _limit: itemsPerPage
+      _limit: PersonsPerPage
     }
   })
 
-  const totalPages = Math.ceil(Number(headers['x-total-count']) / itemsPerPage)
+  const totalPages = Math.ceil(Number(headers['x-total-count']) / PersonsPerPage)
   const hasNextPage = page < totalPages
   const hasPreviousPage = page > 1
 
@@ -46,12 +46,12 @@ export function useGetItems<T>(resource: Resources) {
   const { itemsQueryKey } = useQueryHelpers(resource)
 
   const page = metadata.page[resource]
-  const itemsPerPage = metadata.itemsPerPage[resource]
+  const personsPerPage = metadata.personsPerPage[resource]
   const filter = metadata.filter[resource]
 
   const fetcher = useCallback(
-    <T>(page: number) => getItems<T>(resource, page, itemsPerPage, filter),
-    [filter, itemsPerPage, resource]
+    <T>(page: number) => getItems<T>(resource, page, personsPerPage, filter),
+    [filter, personsPerPage, resource]
   )
 
   const query = useQuery(itemsQueryKey(page), () => fetcher<T>(page), {
