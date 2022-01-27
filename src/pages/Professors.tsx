@@ -12,6 +12,7 @@ export function Professors() {
         resource="professors"
         title="Professors"
         persons={query.data?.items}
+        isLoading={query.isLoading}
         isRefetching={query.isRefetching}
       />
     </Layout>

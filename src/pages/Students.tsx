@@ -12,6 +12,7 @@ export function Students() {
         resource="students"
         title="Students"
         persons={query.data?.items}
+        isLoading={query.isLoading}
         isRefetching={query.isRefetching}
       />
     </Layout>
