@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useCallback, useEffect, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { getUserProfile, loginUser } from '../services/auth'
@@ -53,12 +53,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       .finally(() => setIsAuthenticating(false))
   }
 
-  const logout = useCallback(() => {
+  const logout = () => {
     setUser(null)
     setIsAuthenticated(false)
     removeLocalStorage('user')
-    navigate('/login', { replace: true })
-  }, [navigate])
+  }
 
   useEffect(() => {
     const localStorage = getLocalStorage<{ id: string; accessToken: string }>('user')
@@ -76,7 +75,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setIsLoading(false)
       logout()
     }
-  }, [logout])
+  }, [])
 
   const value = { user, isAuthenticated, isAuthenticating, isLoading, login, logout }
 
