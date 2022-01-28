@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 
-import { PublicLayout } from '../Layouts/PublicLayout'
-import { Login } from '../pages/Login'
+import { PublicLayout } from '../layouts/PublicLayout'
+import { Login } from '../pages/login'
 
 export function PublicRoutes() {
   return (

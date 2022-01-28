@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom'
 
-import { PrivateLayout } from '../Layouts/PrivateLayout'
-import { Professors } from '../pages/Dashboard/Professors'
-import { Students } from '../pages/Dashboard/Students'
+import { PrivateLayout } from '../layouts/PrivateLayout'
+import { Professors } from '../pages/dashboard/professors'
+import { Students } from '../pages/dashboard/students'
 
 export function PrivateRoutes() {
   return (
