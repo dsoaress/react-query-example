@@ -1,4 +1,5 @@
 import { Layout } from '../components/Layout'
+import { Pagination } from '../components/Pagination'
 import { PersonsList } from '../components/PersonsList'
 import { useGetItems } from '../hooks/useGetItems'
 import { Person } from '../types/Resources'
@@ -15,6 +16,7 @@ export function Professors() {
         isLoading={query.isLoading}
         isRefetching={query.isRefetching}
       />
+      <Pagination resource="professors" />
     </Layout>
   )
 }

@@ -13,8 +13,6 @@ import { useAuth } from '../hooks/useContext'
 export function ProfileMenu() {
   const { user, logout } = useAuth()
 
-  console.log(user)
-
   return (
     <Menu>
       <MenuButton as={Avatar} size="sm" cursor="pointer" name={user?.avatar} src={user?.avatar} />

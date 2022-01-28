@@ -17,8 +17,8 @@ export function Seed() {
 
   data.users.push({
     id: 'b940b086-fdb5-403b-9ef4-377c0d517123',
-    avatar: faker.image.avatar(),
-    name: 'John Doe',
+    avatar: 'https://github.com/dsoaress.png',
+    name: 'Daniel Soares',
     email: 'admin@admin.com',
     password: hashSync('12345678', 10),
     createdAt: new Date().toISOString()
