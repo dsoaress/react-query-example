@@ -19,8 +19,8 @@ export function Header() {
       <Flex justify="space-between" align="center" maxW="container.xl" mx="auto">
         <Logo color="white" h="6" />
         <HStack as="nav" spacing={4}>
-          <NavLink to="/students">Students</NavLink>
-          <NavLink to="/professors">Professors</NavLink>
+          <NavLink to="students">Students</NavLink>
+          <NavLink to="professors">Professors</NavLink>
           <ProfileMenu />
         </HStack>
       </Flex>

@@ -33,7 +33,7 @@ export function PersonsList({
       {isLoading ? (
         <PersonsListSkeleton personsPerPage={personsPerPage[resource]} />
       ) : (
-        persons?.map(person => <PersonCard key={person.id} resource={resource} {...person} />)
+        persons?.map(person => <PersonCard key={person.id} {...person} />)
       )}
     </Stack>
   )

@@ -1,14 +1,13 @@
-import { Layout } from '../components/Layout'
-import { Pagination } from '../components/Pagination'
-import { PersonsList } from '../components/PersonsList'
-import { useGetItems } from '../hooks/useGetItems'
-import { Person } from '../types/Resources'
+import { Pagination } from '../../components/Pagination'
+import { PersonsList } from '../../components/PersonsList'
+import { useGetItems } from '../../hooks/useGetItems'
+import { Person } from '../../types/Resources'
 
 export function Professors() {
   const { query } = useGetItems<Person[]>('professors')
 
   return (
-    <Layout>
+    <>
       <PersonsList
         resource="professors"
         title="Professors"
@@ -17,6 +16,6 @@ export function Professors() {
         isRefetching={query.isRefetching}
       />
       <Pagination resource="professors" />
-    </Layout>
+    </>
   )
 }
