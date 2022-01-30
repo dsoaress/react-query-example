@@ -1,6 +1,7 @@
-import { Avatar, Box, Flex, HStack, Text } from '@chakra-ui/react'
+import { Box, Flex, HStack, Text } from '@chakra-ui/react'
 
 import { Person, Resources } from '../types/Resources'
+import { Avatar } from './Avatar'
 import { Link } from './Link'
 
 type PersonCardProps = Person & { resource: Resources }
@@ -18,7 +19,7 @@ export function PersonCard({ id, avatar, name, email, resource }: PersonCardProp
       bg="gray.50"
     >
       <HStack spacing={4}>
-        <Avatar size="md" name={name} src={avatar} />
+        <Avatar name={name} src={avatar} />
         <Box>
           <Text fontWeight="bold" fontSize={14} color="blue.600">
             {name}

@@ -1,21 +1,16 @@
-import {
-  Avatar,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  MenuList
-} from '@chakra-ui/react'
+import { Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList } from '@chakra-ui/react'
 
 import { useAuth } from '../hooks/useContext'
+import { Avatar } from './Avatar'
 
 export function ProfileMenu() {
   const { user, logout } = useAuth()
 
   return (
     <Menu>
-      <MenuButton as={Avatar} size="sm" cursor="pointer" name={user?.avatar} src={user?.avatar} />
+      <MenuButton size="sm" cursor="pointer" border="2px" borderColor="pink.600" rounded="full">
+        <Avatar src={user?.avatar} name={user?.name} size="sm" />
+      </MenuButton>
       <MenuList>
         <MenuGroup title="Profile">
           <MenuItem>My Account</MenuItem>
