@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { useToast } from '../hooks/useToast'
 import { getUserProfile, loginUser } from '../services/auth'
 import { ApiResponseError } from '../types/Api'
 import { User } from '../types/Resources'
@@ -32,6 +33,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [isAuthenticating, setIsAuthenticating] = useState(false)
   const [isLoading, setIsLoading] = useState(!user)
   const navigate = useNavigate()
+  const toast = useToast()
 
   const login = ({ email, password }: LoginData) => {
     setIsAuthenticating(true)
@@ -39,7 +41,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       .then(({ data }) => {
         setUser(data)
         setIsAuthenticated(true)
-        console.log(`Welcome ${data.name}!`)
+        toast({
+          title: `Welcome ${data.name}!`,
+          status: 'success'
+        })
         setLocalStorage('user', {
           id: data.id,
           accessToken: data.accessToken
@@ -47,8 +52,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
       })
       .then(() => navigate('/', { replace: true }))
       .catch((error: ApiResponseError) => {
-        if (error.response?.status === 400) console.log('Invalid email or password')
-        else console.log('Something went wrong')
+        if (error.response?.status === 400) {
+          toast({
+            title: 'Invalid credentials',
+            status: 'error'
+          })
+        } else {
+          toast({
+            title: 'Error',
+            description: 'Something went wrong',
+            status: 'error'
+          })
+        }
       })
       .finally(() => setIsAuthenticating(false))
   }

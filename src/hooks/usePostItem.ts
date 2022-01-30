@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid'
 import { api, apiRoutes } from '../services/api'
 import { ApiResponseError } from '../types/Api'
 import { Resources } from '../types/Resources'
+import { useToast } from './useToast'
 
 type Options = {
   message?: string
@@ -27,22 +28,17 @@ export function usePostItem<T>(
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const [newItem, setNewItem] = useState(initialData)
+  const toast = useToast()
 
   const mutation = useMutation(() => postItem<T>(resource, newItem), {
-    onMutate: () => message && console.log('Saving...'),
-    onSuccess: (_data, _variables, context) => {
-      message &&
-        console.log(message, {
-          id: context
-        })
+    onSuccess: () => {
+      message && toast({ title: message, status: 'success' })
       setNewItem(initialData)
       queryClient.removeQueries(resource)
       redirect && navigate(redirect)
     },
-    onError: (error: ApiResponseError, _variables, context) => {
-      console.log(error.message, {
-        id: context
-      })
+    onError: (error: ApiResponseError) => {
+      toast({ title: error.message, status: 'error' })
     }
   })
 

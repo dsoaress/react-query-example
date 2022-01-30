@@ -1,3 +1,4 @@
+import { useToast } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
@@ -22,30 +23,24 @@ export function usePathItem<T>(resource: Resources, id: string, { message, redir
   const queryClient = useQueryClient()
   const { query } = useGetItem<T>(resource, id)
   const [item, setItem] = useState<T>()
+  const toast = useToast()
   const initialItem = query.data?.item
 
   useEffect(() => initialItem && setItem(initialItem), [initialItem])
-  useEffect(() => {
-    if (query.error) navigate('/404')
-  }, [navigate, query.error])
 
   const mutation = useMutation(() => patchItem(resource, id, item), {
-    onMutate: () => console.log('Saving...'),
-    onSuccess: (_data, _variables, context) => {
-      console.log(message || 'Saved', {
-        id: context
-      })
+    onSuccess: () => {
+      toast({ title: message || 'Saved', status: 'success' })
       queryClient.removeQueries(resource)
       redirect && navigate(redirect)
     },
-    onError: (error: ApiResponseError, _variables, context) => {
-      console.log(error.message, {
-        id: context
-      })
+    onError: (error: ApiResponseError) => {
+      toast({ title: error.message, status: 'error' })
     }
   })
 
   return {
+    isLoading: query.isLoading,
     mutation,
     item,
     setItem

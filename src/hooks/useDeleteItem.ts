@@ -5,6 +5,7 @@ import { api, apiRoutes } from '../services/api'
 import { ApiResponseError } from '../types/Api'
 import { Resources } from '../types/Resources'
 import { useQueryHelpers } from './useQueryHelpers'
+import { useToast } from './useToast'
 
 type Options = {
   message?: string
@@ -19,21 +20,21 @@ export function useDeleteItem(resource: Resources, id: string, { message, redire
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const { itemQueryKey } = useQueryHelpers(resource)
+  const toast = useToast()
+
   const mutation = useMutation(itemQueryKey(id), () => deleteItem(resource, id), {
-    onMutate: () => message && console.log('Deleting...'),
-    onSuccess: (_data, _variables, context) => {
-      message &&
-        console.log(message, {
-          id: context
-        })
+    onSuccess: () => {
+      message && toast({ title: message, status: 'success' })
       queryClient.removeQueries(resource)
       redirect && navigate(redirect)
     },
-    onError: (error: ApiResponseError, _variables, context) =>
-      console.log(error.message, {
-        id: context
-      })
+    onError: (error: ApiResponseError) => {
+      toast({ title: error.message, status: 'error' })
+    }
   })
 
-  return { deleteItem: mutation.mutate }
+  return {
+    deleteItem: mutation.mutate,
+    isDeleting: mutation.isLoading
+  }
 }

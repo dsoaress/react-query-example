@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import { Button } from '../../../components/Button'
 import { Input } from '../../../components/Input'
+import { Loading } from '../../../components/Loading'
 import { useDeleteItem } from '../../../hooks/useDeleteItem'
 import { usePathItem } from '../../../hooks/usePathItem'
 import { Person, Resources } from '../../../types/Resources'
@@ -10,13 +11,17 @@ import { Person, Resources } from '../../../types/Resources'
 export function EditProfessor() {
   const navigate = useNavigate()
   const { state } = useLocation() as { state: { id: string; resource: Resources } }
-  const { mutation, item, setItem } = usePathItem<Person>(state.resource, state.id, {
-    message: 'Professor updated successfully'
+
+  const { mutation, item, setItem, isLoading } = usePathItem<Person>(state.resource, state.id, {
+    message: 'Professor updated successfully',
+    redirect: '/dashboard/professors'
   })
-  const { deleteItem } = useDeleteItem(state.resource, state.id, {
+  const { deleteItem, isDeleting } = useDeleteItem(state.resource, state.id, {
     message: 'Professor deleted successfully',
     redirect: '/dashboard/professors'
   })
+
+  if (isLoading) return <Loading />
 
   return (
     <Box>
@@ -41,7 +46,7 @@ export function EditProfessor() {
         />
 
         <Flex justify="space-between">
-          <Button colorScheme="red" mr={3} onClick={() => deleteItem()}>
+          <Button colorScheme="red" isLoading={isDeleting} mr={3} onClick={() => deleteItem()}>
             Delete
           </Button>
           <HStack>
