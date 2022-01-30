@@ -1,7 +1,6 @@
-import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from 'react'
+import { createContext, Dispatch, ReactNode, SetStateAction, useState } from 'react'
 
 import { Resources } from '../types/Resources'
-import { getLocalStorage, setLocalStorage } from '../utils/localStorage'
 
 type Page = { [key in Resources]: number }
 type SetPage = Dispatch<SetStateAction<Page>>
@@ -44,25 +43,6 @@ export function MetadataProvider({ children }: MetadataProviderProps) {
   const [personsPerPage, setPersonsPerPage] = useState(metadataDefaultValues.personsPerPage)
   const [totalPages, setTotalPages] = useState(metadataDefaultValues.totalPages)
   const [filter, setFilter] = useState(metadataDefaultValues.filter)
-
-  useEffect(() => {
-    const localStoragePage = getLocalStorage<Page>('page')
-    const localStoragePersonsPerPage = getLocalStorage<PersonsPerPage>('PersonsPerPage')
-    const localStorageTotalPages = getLocalStorage<TotalPages>('totalPages')
-    const localStorageFilter = getLocalStorage<Filter>('filter')
-
-    if (localStoragePage) setPage(localStoragePage)
-    if (localStoragePersonsPerPage) setPersonsPerPage(localStoragePersonsPerPage)
-    if (localStorageTotalPages) setTotalPages(localStorageTotalPages)
-    if (localStorageFilter) setFilter(localStorageFilter)
-  }, [])
-
-  useEffect(() => {
-    setLocalStorage('page', page)
-    setLocalStorage('PersonsPerPage', personsPerPage)
-    setLocalStorage('totalPages', totalPages)
-    setLocalStorage('filter', filter)
-  }, [filter, personsPerPage, page, totalPages])
 
   const value = {
     page,

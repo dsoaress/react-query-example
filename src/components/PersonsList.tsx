@@ -1,4 +1,6 @@
-import { Heading, HStack, Spinner, Stack } from '@chakra-ui/react'
+import { Flex, Heading, HStack, IconButton, Spinner, Stack } from '@chakra-ui/react'
+import { FiPlusCircle } from 'react-icons/fi'
+import { useNavigate } from 'react-router-dom'
 
 import { useMetadata } from '../hooks/useContext'
 import { Person, Resources } from '../types/Resources'
@@ -22,18 +24,27 @@ export function PersonsList({
   isRefetching
 }: PersonsListProps) {
   const { personsPerPage } = useMetadata()
+  const navigate = useNavigate()
 
   return (
     <Stack spacing={4}>
-      <HStack spacing="4" align="center" mb="4">
-        <Filter resource={resource} />
+      <Flex align="center" justify="space-between" mb="4">
         <Heading>{title}</Heading>
-        {isRefetching && <Spinner size="xs" color="gray.300" />}
-      </HStack>
+        <HStack>
+          {isRefetching && <Spinner size="xs" color="gray.300" />}
+          <Filter resource={resource} />
+          <IconButton
+            aria-label={`add new ${resource}`}
+            icon={<FiPlusCircle />}
+            colorScheme="blue"
+            onClick={() => navigate('new')}
+          />
+        </HStack>
+      </Flex>
       {isLoading ? (
         <PersonsListSkeleton personsPerPage={personsPerPage[resource]} />
       ) : (
-        persons?.map(person => <PersonCard key={person.id} {...person} />)
+        persons?.map(person => <PersonCard key={person.id} resource={resource} {...person} />)
       )}
     </Stack>
   )

@@ -1,7 +1,9 @@
-import { Box, Button, chakra, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react'
+import { Box, chakra, Stack } from '@chakra-ui/react'
 import { useState } from 'react'
 
 import { useAuth } from '../hooks/useContext'
+import { Button } from './Button'
+import { Input } from './Input'
 import { PasswordInput } from './PasswordInput'
 
 export function LoginForm() {
@@ -19,24 +21,21 @@ export function LoginForm() {
         }}
       >
         <Stack spacing="6">
-          <FormControl id="email">
-            <FormLabel>Email address</FormLabel>
-            <Input
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={user.email}
-              onChange={e => setUser({ ...user, email: e.target.value })}
-              required
-            />
-          </FormControl>
+          <Input
+            label="Email address"
+            name="email"
+            type="email"
+            autoComplete="email"
+            value={user.email}
+            onChange={e => setUser({ ...user, email: e.target.value })}
+            required
+          />
           <PasswordInput
             value={user.password}
             onChange={e => setUser({ ...user, password: e.target.value })}
           />
           <Button
             type="submit"
-            colorScheme="blue"
             size="lg"
             fontSize="md"
             isLoading={isAuthenticating}

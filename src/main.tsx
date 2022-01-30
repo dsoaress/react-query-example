@@ -6,9 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import { AuthProvider } from './contexts/Auth'
 import { MetadataProvider } from './contexts/Metadata'
-import { PrivateRoutes } from './routes/private.routes'
-import { PublicRoutes } from './routes/public.routes'
-import { RedirectRoutes } from './routes/redirects.routes'
+import { Routes } from './routes'
 import { queryClient, QueryClientProvider } from './services/queryClient'
 
 function App() {
@@ -18,9 +16,7 @@ function App() {
         <ChakraProvider>
           <AuthProvider>
             <MetadataProvider>
-              <PublicRoutes />
-              <RedirectRoutes />
-              <PrivateRoutes />
+              <Routes />
             </MetadataProvider>
           </AuthProvider>
         </ChakraProvider>

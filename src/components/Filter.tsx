@@ -38,7 +38,7 @@ export function Filter({ resource }: FilterProps) {
           }
         >
           <MenuItemOption value="name">Name</MenuItemOption>
-          <MenuItemOption value="desc">Registration date</MenuItemOption>
+          <MenuItemOption value="createdAt">Registration date</MenuItemOption>
         </MenuOptionGroup>
         <MenuDivider />
         <MenuOptionGroup

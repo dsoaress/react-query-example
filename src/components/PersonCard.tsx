@@ -1,9 +1,11 @@
 import { Avatar, Box, Flex, HStack, Text } from '@chakra-ui/react'
 
-import { Person } from '../types/Resources'
+import { Person, Resources } from '../types/Resources'
 import { Link } from './Link'
 
-export function PersonCard({ id, avatar, name, email }: Person) {
+type PersonCardProps = Person & { resource: Resources }
+
+export function PersonCard({ id, avatar, name, email, resource }: PersonCardProps) {
   return (
     <Flex
       justify="space-between"
@@ -26,7 +28,9 @@ export function PersonCard({ id, avatar, name, email }: Person) {
           </Text>
         </Box>
       </HStack>
-      <Link to={id}>Edit</Link>
+      <Link to="edit" state={{ id, resource }}>
+        Edit
+      </Link>
     </Flex>
   )
 }

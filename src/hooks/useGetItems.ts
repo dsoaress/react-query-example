@@ -58,24 +58,25 @@ export function useGetItems<T>(resource: Resources) {
     onError: (error: ApiResponseError) => console.log(error.message)
   })
 
-  const totalPages = query.data?.totalPages || 1
-  const hasNextPage = query.data?.hasNextPage || false
-  const hasPreviousPage = query.data?.hasPreviousPage || false
-
   const setPagesInfo = useCallback(() => {
-    setTotalPages(prev => ({ ...prev, [resource]: totalPages }))
-    if (totalPages && page > totalPages) setPage(prev => ({ ...prev, [resource]: totalPages }))
-  }, [page, resource, setPage, setTotalPages, totalPages])
+    if (query.data) {
+      setTotalPages(prev => ({ ...prev, [resource]: query.data.totalPages }))
+      if (page > query.data.totalPages)
+        setPage(prev => ({ ...prev, [resource]: query.data.totalPages }))
+    }
+  }, [page, query.data, resource, setPage, setTotalPages])
 
   const prefetchPages = useCallback(() => {
-    if (hasPreviousPage) {
-      queryClient.prefetchQuery(itemsQueryKey(page - 1), () => fetcher<T>(page - 1))
-    }
+    if (query.data) {
+      if (query.data.hasPreviousPage) {
+        queryClient.prefetchQuery(itemsQueryKey(page - 1), () => fetcher<T>(page - 1))
+      }
 
-    if (hasNextPage) {
-      queryClient.prefetchQuery(itemsQueryKey(page + 1), () => fetcher<T>(page + 1))
+      if (query.data.hasNextPage) {
+        queryClient.prefetchQuery(itemsQueryKey(page + 1), () => fetcher<T>(page + 1))
+      }
     }
-  }, [fetcher, hasNextPage, hasPreviousPage, itemsQueryKey, page, queryClient])
+  }, [fetcher, itemsQueryKey, page, query.data, queryClient])
 
   useEffect(() => setPagesInfo(), [setPagesInfo])
   useEffect(() => prefetchPages(), [prefetchPages])

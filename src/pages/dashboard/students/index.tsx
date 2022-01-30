@@ -1,7 +1,7 @@
-import { Pagination } from '../../components/Pagination'
-import { PersonsList } from '../../components/PersonsList'
-import { useGetItems } from '../../hooks/useGetItems'
-import { Person } from '../../types/Resources'
+import { Pagination } from '../../../components/Pagination'
+import { PersonsList } from '../../../components/PersonsList'
+import { useGetItems } from '../../../hooks/useGetItems'
+import { Person } from '../../../types/Resources'
 
 export function Students() {
   const { query } = useGetItems<Person[]>('students')
